@@ -3,17 +3,37 @@ namespace CodeReport;
 
 use Symfony\Component\Templating\EngineInterface;
 
+/**
+ * Report Generator
+ *
+ * @package CodeReport
+ */
 class Generator
 {
+    /**
+     * @var Filesystem
+     */
     private $filesystem;
+
+    /**
+     * @var \Symfony\Component\Templating\EngineInterface
+     */
     private $templateEngine;
 
+    /**
+     * @param EngineInterface $templateEngine
+     * @param Filesystem $filesystem
+     */
     public function __construct(EngineInterface $templateEngine, Filesystem $filesystem)
     {
         $this->templateEngine = $templateEngine;
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * @param Generator\FileParser\ParserInterface $data
+     * @param $outputDir
+     */
     public function generateReport(Generator\FileParser\ParserInterface $data, $outputDir)
     {
         $outputDir = rtrim($outputDir, '/\\');

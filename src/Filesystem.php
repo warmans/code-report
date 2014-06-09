@@ -3,6 +3,9 @@ namespace CodeReport;
 
 use Symfony\Component\Filesystem\Exception\IOException;
 
+/**
+ * @package CodeReport
+ */
 class Filesystem extends \Symfony\Component\Filesystem\Filesystem
 {
     /**

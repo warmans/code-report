@@ -5,8 +5,18 @@ use CodeReport\File;
 use CodeReport\Filesystem;
 use CodeReport\Generator\FileParser\PHPLoc;
 
+/**
+ * Create a parser by matching a line an input file
+ *
+ * @package CodeReport\Generator\FileParser
+ */
 class ParserFactory
 {
+    /**
+     * @param File $file
+     * @return ParserInterface
+     * @throws \RuntimeException
+     */
     public function fromFile(File $file)
     {
         switch (true) {
