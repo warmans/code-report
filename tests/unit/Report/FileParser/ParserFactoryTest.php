@@ -1,5 +1,5 @@
 <?php
-namespace CodeReport\Generator\FileParser;
+namespace CodeReport\Report\FileParser;
 
 use CodeReport\FileHelpers;
 

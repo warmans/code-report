@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 use Symfony\Component\Templating\PhpEngine;
+use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\TemplateNameParser;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 
@@ -23,20 +24,21 @@ $services['filesystem'] = function () {
 };
 
 $services['template.engine'] = function () use ($services) {
-    return new PhpEngine(new TemplateNameParser(), new FilesystemLoader($services['config']['template.paths']));
+    $engine =  new PhpEngine(new TemplateNameParser(), new FilesystemLoader($services['config']['template.paths']));
+    $engine->set(new SlotsHelper());
+    return $engine;
 };
 
 $services['report.generator'] = function () use ($services) {
-    return new \CodeReport\Generator($services['template.engine'], $services['filesystem']);
+    return new \CodeReport\Report\Generator($services['template.engine'], $services['filesystem']);
 };
 
 $services['report.parser.factory'] = function () use ($services) {
-    return new \CodeReport\Generator\FileParser\ParserFactory($services['filesystem']);
+    return new \CodeReport\Report\FileParser\ParserFactory($services['filesystem']);
 };
 
 $services['command.generate'] = function () use ($services) {
     return new CodeReport\Console\Command\Generate(
-        null,
         $services['report.generator'],
         $services['report.parser.factory']
     );

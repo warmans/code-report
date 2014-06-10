@@ -23,4 +23,13 @@ class File extends \SplFileObject
         }
         return false;
     }
+
+    public function getContents()
+    {
+        $buff = '';
+        foreach ($this as $line) {
+            $buff .= "$line\n";
+        }
+        return $buff;
+    }
 }

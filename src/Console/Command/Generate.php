@@ -1,7 +1,9 @@
 <?php
 namespace CodeReport\Console\Command;
 
-use CodeReport\Generator;
+use CodeReport\File;
+use CodeReport\Report;
+use CodeReport\Report\Generator;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,15 +22,15 @@ class Generate extends Command
     private $generator;
 
     /**
-     * @var \CodeReport\Generator\FileParser\ParserFactory
+     * @var \CodeReport\Report\FileParser\ParserFactory
      */
     private $fileParserFactory;
 
     /**
      * @param Generator $generator
-     * @param Generator\FileParser\ParserFactory $fileParserFactory
+     * @param Report\FileParser\ParserFactory $fileParserFactory
      */
-    public function __construct(Generator $generator, Generator\FileParser\ParserFactory $fileParserFactory)
+    public function __construct(Generator $generator, Report\FileParser\ParserFactory $fileParserFactory)
     {
         $this->generator = $generator;
         $this->fileParserFactory = $fileParserFactory;
@@ -51,7 +53,7 @@ class Generate extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->generator->generateReport(
-            $this->fileParserFactory->fromFile($input->getArgument('infile')),
+            $this->fileParserFactory->fromFile(new File($input->getArgument('infile'))),
             $input->getArgument('outdir')
         );
         $output->writeln('ok');
