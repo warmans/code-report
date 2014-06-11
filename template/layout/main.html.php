@@ -72,6 +72,16 @@
             .stat-block .super .glyphicon {
                 font-size : 0.8em
             }
+
+            .mma-table td, .mma-table th {
+                text-align: center;
+            }
+
+            .mma-table th .super {
+                font-size: 50pt;
+            }
+
+
         </style>
     </head>
     <body>
@@ -87,10 +97,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 sidebar">
-                    <ul class="nav nav-sidebar">
-                        <?php foreach($meta['reports'] as $name => $path) { ?>
-                            <li><a href="<?php echo $path;?>"><?php echo $name; ?></a></li>
-                        <?php } ?>
+                    <ul class="nav nav-sidebar" id="nav-sidebar">
 
                     </ul>
                 </div>
@@ -102,7 +109,19 @@
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
         <!-- Latest compiled and minified JavaScript -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                console.log('foo');
+                $.get('code-report.json', function (data) {
+                    $.each(data.reports, function(name, path){
+                        $('#nav-sidebar').append('<li><a href="'+path+'">'+name+'</a></li>');
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

@@ -38,6 +38,9 @@ class Generator
     public function generateReport(FileParser\AbstractParser $parser, $outputDir)
     {
         $outputDir = rtrim($outputDir, '/\\');
+        if (!$this->filesystem->exists($outputDir)) {
+           $this->filesystem->mkdir($outputDir);
+        }
         $metaFile = "$outputDir/code-report.json";
         $templateEngine = $this->templateEngine;
         //lock and update metadata
