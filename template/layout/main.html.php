@@ -17,12 +17,15 @@
         <![endif]-->
 
         <style>
-            body {
-                padding-top: 40px;
-            }
             .sub-header {
                 padding-bottom: 10px;
                 border-bottom: 1px solid #eee;
+            }
+
+            .huge {
+                font-weight: bold;
+                font-size : 80pt;
+                text-align: right;
             }
 
             blockquote.smaller {
@@ -32,7 +35,7 @@
 
             .sidebar {
                 position: fixed;
-                top: 51px;
+                top: 1px;
                 bottom: 0;
                 left: 0;
                 z-index: 1000;
@@ -52,7 +55,9 @@
             .nav-sidebar > li > a {
                 padding-right: 20px;
                 padding-left: 20px;
+                color : #000;
             }
+
             .nav-sidebar > .active > a {
                 color: #fff;
                 background-color: #428bca;
@@ -85,15 +90,6 @@
         </style>
     </head>
     <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-dashboard"></span> Code Report</a>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 sidebar">

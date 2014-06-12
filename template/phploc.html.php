@@ -8,81 +8,98 @@
         <h3 class="panel-title">
             <span class="glyphicon glyphicon-fullscreen"></span> Size
             <span class="pull-right">
-                <span class="label label-default"><?php echo $data->first('Directories');?> Directories</span>
-                <span class="label label-default"><?php echo $data->first('Files');?> Files</span>
+                <span class="label label-default"><?php echo $data->last('directories');?> Directories</span>
+                <span class="label label-default"><?php echo $data->last('files');?> Files</span>
             </span>
         </h3>
     </div>
     <div class="panel-body">
-        <div class="row">
-            <div class="col-md-3 stat-block">
-                <div class="super">
-                    <span class="glyphicon glyphicon-align-justify"></span> <?php echo $data->first('Lines of Code (LOC)');?>
-                </div>
-                <div class="sub">
-                    Lines of Code (LOC)<br />
-                    <?php echo $data['size']['lloc'];?> <abbr title="Logical Lines of Code">LLOC</abbr>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="progress" style="margin: 30px 0px 0px 0px">
-                    <div class="progress-bar progress-bar-success" style="width: <?php echo $view['math']->pcnt($data['Non-Comment Lines of Code (NCLOC)'][0], $data['Lines of Code (LOC)'][0]); ?>%">
-                        <?php echo $view['math']->pcnt($data['Non-Comment Lines of Code (NCLOC)'][0], $data['Lines of Code (LOC)'][0]); ?> NCLOC
-                    </div>
-                    <div class="progress-bar progress-bar-primary" style="width:<?php echo $view['math']->pcnt($data['Comment Lines of Code (CLOC)'][0], $data['Lines of Code (LOC)'][0]); ?>%">
-                        <?php echo $view['math']->pcnt($data['Comment Lines of Code (CLOC)'][0], $data['Lines of Code (LOC)'][0]); ?> CLOC
-                    </div>
-                </div>
-                <div class="progress" style="margin: 40px 0px 0px 0px">
-                    <div class="progress-bar progress-bar-success" style="width: <?php echo $view['math']->pcnt($data['size']['classes'], $data['size']['lloc']);?>%">
-                        Classes (<?php echo $view['math']->pcnt($data['size']['classes'], $data['size']['lloc']);?>%)
-                    </div>
-                    <div class="progress-bar progress-bar-primary" style="width:<?php echo $view['math']->pcnt($data['size']['functions'], $data['size']['lloc']);?>%">
-                        Functions (<?php echo $view['math']->pcnt($data['size']['functions'], $data['size']['lloc']);?>%)
-                    </div>
-                    <div class="progress-bar progress-bar-warning" style="width:<?php echo $view['math']->pcnt($data['size']['other'], $data['size']['lloc']);?>%">
-                        Others  (<?php echo $view['math']->pcnt($data['size']['other'], $data['size']['lloc']);?>%)
-                    </div>
-                </div>
+        <div class="col-md-12">
+            <div class="huge">
+                </span><?php echo $data->last('loc');?> LOC
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-4">
-                <strong>Class Length</strong>
-                <?php echo $view->render(
-                    'partial/mmatable',
-                    array(
-                        'tl' => $data->first('Average Class Length (LLOC)'), 'tr' => 'LOC Avg.',
-                        'bl' => '-',
-                        'br' => '-',
-                    )
-                ); ?>
-            </div>
-            <div class="col-md-4">
-                <strong>Method Length</strong>
-                <?php echo $view->render(
-                    'partial/mmatable',
-                    array(
-                        'tl' => $data->first('Average Method Length (LLOC)'), 'tr' => 'LOC Avg.',
-                        'bl' => '-',
-                        'br' => '-',
-                    )
-                ); ?>
-            </div>
-            <div class="col-md-4">
-                <strong>Function Length</strong>
-                <?php echo $view->render(
-                    'partial/mmatable',
-                    array(
-                        'tl' => $data->first('Average Function Length (LLOC)'), 'tr' => 'LOC Avg.',
-                        'bl' => '-',
-                        'br' => '-',
-                    )
-                ); ?>
-            </div>
+        <div class="col-md-12">
+            <table class="table">
+                 <tr>
+                    <td style="width : 15%"><abbr title="Non-Comment Lines of Code">NCLOC</abbr></td>
+                    <td style="width : 10%">
+                        <span class="label label-default">
+                            <?php echo $data->last('ncloc');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('ncloc'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width : 15%"><abbr title="Comment Lines of Code">CLOC</abbr></td>
+                    <td style="width : 10%">
+                        <span class="label label-default">
+                            <?php echo $data->last('cloc');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('cloc'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width : 15%"><abbr title="Logical Lines of Code">LLOC</abbr></td>
+                    <td>
+                        <span class="label label-default">
+                            <?php echo $data->last('lloc');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('lloc'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width : 15%">Class LLOC</td>
+                    <td>
+                        <span class="label label-default">
+                            <?php echo $data->last('llocClasses');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('llocClasses'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width : 15%">Function LLOC</td>
+                    <td>
+                        <span class="label label-default">
+                            <?php echo $data->last('llocFunctions');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('llocFunctions'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width : 15%">Global LLOC</td>
+                    <td>
+                        <span class="label label-default">
+                            <?php echo $data->last('llocGlobal');?>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 5px 0px 0px 0px">
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('llocGlobal'), $data->last('loc'));?>%"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -95,36 +112,25 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-4">
-                <strong>LLOC</strong>
+            <div class="col-md-6">
+                <strong>Complexity by LLOC</strong>
                 <?php echo $view->render(
                     'partial/mmatable',
                     array(
-                        'tl' => number_format($data['Cyclomatic Complexity / Lines of Code'][0], 3), 'tr' => 'Avg.',
+                        'tl' => number_format($data->last('ccnByLloc'), 3), 'tr' => 'Avg.',
                         'bl' => '-',
                         'br' => '-'
                     )
                 ); ?>
             </div>
-            <div class="col-md-4">
-                <strong>Class</strong>
+            <div class="col-md-6">
+                <strong>Complexity by Num. Methods</strong>
                 <?php echo $view->render(
                     'partial/mmatable',
                     array(
-                        'tl' => number_format($data['Cyclomatic Complexity / Number of Methods'][0], 3), 'tr' => 'Avg.',
+                        'tl' => number_format($data->last('ccnByNom'), 3), 'tr' => 'Avg.',
                         'bl' => '-',
-                        'br' => '-'
-                    )
-                ); ?>
-            </div>
-            <div class="col-md-4">
-                <strong>Method</strong>
-                <?php echo $view->render(
-                    'partial/mmatable',
-                    array(
-                        'tl' => $data['cyclomatic_complexity']['per_method']['avg'], 'tr' => 'Avg.',
-                        'bl' => $data['cyclomatic_complexity']['per_method']['min'].' Min', 'bli'=> 'sort-by-attributes',
-                        'br' => $data['cyclomatic_complexity']['per_method']['max'].' Max', 'bri' => 'sort-by-attributes-alt'
+                        'br' => '-',
                     )
                 ); ?>
             </div>
@@ -140,7 +146,7 @@
     </div>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Constants=<?php echo ($data['dependencies']['global_accesses']['constants'] / $data['dependencies']['global_accesses']['total']) * 100;?>&Vars=<?php echo ($data['dependencies']['global_accesses']['variables'] / $data['dependencies']['global_accesses']['total']) * 100;?>&Super=<?php echo ($data['dependencies']['global_accesses']['super'] / $data['dependencies']['global_accesses']['total']) * 100;?>" style="width : 100%; height : 200px"/>
+            <img src="http://charts.brace.io/pie.svg?Constants=<?php echo $view['math']->pcnt($data->last('globalConstantAccesses'), $data->last('globalAccesses'));?>&Vars=<?php echo $view['math']->pcnt($data->last('globalVariableAccesses'), $data->last('globalAccesses'));?>&Super=<?php echo $view['math']->pcnt($data->last('superGlobalVariableAccesses'), $data->last('globalAccesses'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">
@@ -152,8 +158,8 @@
                 <tr>
                     <td style="width : 15%">Constants</td>
                     <td>
-                        <span class="label label-<?php echo $data['dependencies']['global_accesses']['constants'] > 0 ? 'warning' : 'success';?>">
-                            <?php echo $data['dependencies']['global_accesses']['constants'];?>
+                        <span class="label label-<?php echo $data->last('globalConstantAccesses') > 0 ? 'warning' : 'success';?>">
+                            <?php echo $data->last('globalConstantAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -161,8 +167,8 @@
                 <tr>
                     <td style="width : 15%">Variables</td>
                     <td>
-                        <span class="label label-<?php echo $data['dependencies']['global_accesses']['variables'] > 0 ? 'danger' : 'success';?>">
-                            <?php echo $data['dependencies']['global_accesses']['variables'];?>
+                        <span class="label label-<?php echo $data->last('globalVariableAccesses') > 0 ? 'danger' : 'success';?>">
+                            <?php echo $data->last('globalVariableAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -170,8 +176,8 @@
                 <tr>
                     <td style="width : 15%">Super Globals</td>
                     <td>
-                        <span class="label label-<?php echo $data['dependencies']['global_accesses']['super'] > 0 ? 'warning' : 'success';?>">
-                            <?php echo $data['dependencies']['global_accesses']['super'];?>
+                        <span class="label label-<?php echo $data->last('superGlobalVariableAccesses') > 2 ? 'warning' : 'success';?>">
+                            <?php echo $data->last('superGlobalVariableAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -179,8 +185,8 @@
                 <tr>
                     <th style="width : 15%">Total</th>
                     <td>
-                        <span class="label label-<?php echo $data['dependencies']['global_accesses']['total'] > 0 ? 'warning' : 'success';?>">
-                            <?php echo $data['dependencies']['global_accesses']['total'];?>
+                        <span class="label label-<?php echo $data->last('globalAccesses') > 2 ? 'warning' : 'success';?>">
+                            <?php echo $data->last('globalAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -191,7 +197,7 @@
     <hr>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Static=<?php echo ($data['dependencies']['attribute_accesses']['static'] / ($data['dependencies']['attribute_accesses']['total'] ?: 1)) * 100;?>&Nonstatic=<?php echo ($data['dependencies']['attribute_accesses']['nonstatic'] / ($data['dependencies']['attribute_accesses']['total'] ?: 1)) * 100;?>" style="width : 100%; height : 200px"/>
+            <img src="http://charts.brace.io/pie.svg?Static=<?php echo $view['math']->pcnt($data->last('staticAttributeAccesses'), $data->last('Attribute Accesses'));?>&Nonstatic=<?php echo $view['math']->pcnt($data->last('instanceAttributeAccesses'), $data->last('attributeAccesses'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">
@@ -201,19 +207,19 @@
                     </th>
                 </tr>
                 <tr>
-                    <td style="width : 15%">Non-Static</td>
+                    <td style="width : 15%">Instance Attributes</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['attribute_accesses']['nonstatic'];?>
+                            <?php echo $data->last('instanceAttributeAccesses');?>
                         </span>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td style="width : 15%">Static</td>
+                    <td style="width : 15%">Static Attributes</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['attribute_accesses']['static'];?>
+                            <?php echo $data->last('staticAttributeAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -222,7 +228,7 @@
                     <th style="width : 15%">Total</th>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['attribute_accesses']['total'];?>
+                            <?php echo $data->last('attributeAccesses');?>
                         </span>
                     </td>
                     <td></td>
@@ -233,7 +239,7 @@
     <hr>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Static=<?php echo ($data['dependencies']['method_calls']['static'] / ($data['dependencies']['method_calls']['total'] ?: 1)) * 100;?>&Nonstatic=<?php echo ($data['dependencies']['method_calls']['nonstatic'] / ($data['dependencies']['method_calls']['total'] ?: 1)) * 100;?>" style="width : 100%; height : 200px"/>
+            <img src="http://charts.brace.io/pie.svg?Static=<?php echo $view['math']->pcnt($data->last('staticMethodCalls'), $data->last('methodCalls'));?>&Instance=<?php echo $view['math']->pcnt($data->last('instanceMethodCalls'), $data->last('methodCalls'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">
@@ -246,7 +252,7 @@
                     <td style="width : 15%">Non-Static</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['method_calls']['nonstatic'];?>
+                            <?php echo $data->last('instanceMethodCalls');?>
                         </span>
                     </td>
                     <td></td>
@@ -255,7 +261,7 @@
                     <td style="width : 15%">Static</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['method_calls']['static'];?>
+                            <?php echo $data->last('staticMethodCalls');?>
                         </span>
                     </td>
                     <td></td>
@@ -264,7 +270,7 @@
                     <th style="width : 15%">Total</th>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['dependencies']['method_calls']['total'];?>
+                            <?php echo $data->last('methodCalls');?>
                         </span>
                     </td>
                     <td></td>
@@ -286,23 +292,34 @@
             <?php echo $view->render(
                 'partial/mmatable',
                 array(
-                    'tl'=>$data['structure']['classes']['total'],
-                    'bl'=>$data['structure']['classes']['abstract'].' Abstract',
-                    'br'=>$data['structure']['classes']['concrete'].' Concrete'
+                    'tl'=>$data->last('classes'),
+                    'bl'=>$data->last('abstractClasses').' Abstract',
+                    'br'=>$data->last('concreteClasses').' Concrete'
                 )
             ); ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <strong>Interfaces</strong>
-            <?php echo $view->render('partial/mmatable', array('tl' => $data['structure']['interfaces'], 'bl' => '-', 'br' => '-')); ?>
+            <?php echo $view->render('partial/mmatable', array('tl' => $data->last('interfaces'), 'bl' => '-', 'br' => '-')); ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <strong>Namespaces</strong>
-            <?php echo $view->render('partial/mmatable', array('tl' => $data['structure']['namespaces'], 'bl' => '-', 'br' => '-')); ?>
+            <?php echo $view->render('partial/mmatable', array('tl' => $data->last('namespaces'), 'bl' => '-', 'br' => '-')); ?>
+        </div>
+        <div class="col-md-2">
+            <strong>Traits</strong>
+            <?php echo $view->render('partial/mmatable', array('tl' => $data->last('traits'), 'bl' => '-', 'br' => '-')); ?>
         </div>
         <div class="col-md-3">
-            <strong>Traits</strong>
-            <?php echo $view->render('partial/mmatable', array('tl' => $data['structure']['traits'], 'bl' => '-', 'br' => '-')); ?>
+            <strong>Functions</strong>
+            <?php echo $view->render(
+                'partial/mmatable',
+                array(
+                    'tl'=>$data->last('functions'),
+                    'bl'=>$data->last('namedFunctions').' Named',
+                    'br'=>$data->last('anonymousFunctions').' Anonymous'
+                )
+            ); ?>
         </div>
     </div>
     <hr>
@@ -318,12 +335,12 @@
                     <td style="width : 15%">Static</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['structure']['method']['static'];?>
+                            <?php echo $data->last('staticMethods');?>
                         </span>
                     </td>
                     <td>
                         <div class="progress" style="margin: 5px 0px 0px 0px">
-                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data['structure']['method']['static'], $data['structure']['method']['total']);?>%"></div>
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('staticMethods'), $data->last('methods'));?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -331,12 +348,12 @@
                     <td style="width : 15%">Non Static</td>
                     <td style="width : 10%">
                         <span class="label label-primary">
-                            <?php echo $data['structure']['method']['nonstatic'];?>
+                            <?php echo $data->last('nonStaticMethods');?>
                         </span>
                     </td>
                     <td>
                         <div class="progress" style="margin: 5px 0px 0px 0px">
-                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data['structure']['method']['nonstatic'], $data['structure']['method']['total']);?>%"></div>
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('nonStaticMethods'), $data->last('methods'));?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -344,12 +361,12 @@
                     <td style="width : 15%">Public</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['structure']['method']['public'];?>
+                            <?php echo $data->last('publicMethods');?>
                         </span>
                     </td>
                     <td>
                         <div class="progress" style="margin: 5px 0px 0px 0px">
-                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data['structure']['method']['public'], $data['structure']['method']['total']);?>%"></div>
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('publicMethods'), $data->last('methods'));?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -357,12 +374,12 @@
                     <td style="width : 15%">Private / Protected</td>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['structure']['method']['nonpublic'];?>
+                            <?php echo $data->last('nonPublicMethods');?>
                         </span>
                     </td>
                     <td>
                         <div class="progress" style="margin: 5px 0px 0px 0px">
-                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data['structure']['method']['nonpublic'], $data['structure']['method']['total']);?>%"></div>
+                            <div class="progress-bar progress-bar-primary" style="width: <?php echo $view['math']->pcnt($data->last('nonPublicMethods'), $data->last('methods'));?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -370,12 +387,46 @@
                     <th style="width : 15%">Total</th>
                     <td>
                         <span class="label label-primary">
-                            <?php echo $data['structure']['method']['total'];?>
+                             <?php echo $data->last('methods');?>
                         </span>
                     </td>
                     <td></td>
                 </tr>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-tasks"></span> Tests
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Test Classes</strong>
+                <?php echo $view->render(
+                    'partial/mmatable',
+                    array(
+                        'tl'=>$data->last('testClasses'),
+                        'bl'=>'-',
+                        'br'=>'-',
+                    )
+                ); ?>
+            </div>
+            <div class="col-md-6">
+                <strong>Test Methods</strong>
+                <?php echo $view->render(
+                    'partial/mmatable',
+                    array(
+                        'tl'=>$data->last('testMethods'),
+                        'bl'=>'-',
+                        'br'=>'-',
+                    )
+                ); ?>
+            </div>
         </div>
     </div>
 </div>

@@ -25,12 +25,32 @@ class PHPLoc extends AbstractParser
         return 'phploc';
     }
 
+    public function getData()
+    {
+        return $this->getDataXml();
+    }
+
+
+    public function getDataXml()
+    {
+        $data = array();
+        $xml = simplexml_load_string($this->inFile->getContents());
+        foreach ($xml->children() as $node) {
+            if (isset($data[$node->getName()])) {
+                $data[$node->getName()][] = (string)$node;
+            } else {
+                $data[$node->getName()] = array((string)$node);
+            }
+        }
+        return new Data($data);
+    }
+
     /**
      * Get a parsed representation of the raw data
      *
      * @return mixed
      */
-    public function getData()
+    public function getDataCsv()
     {
         ini_set("auto_detect_line_endings", true);
 
@@ -57,14 +77,5 @@ class PHPLoc extends AbstractParser
             }
         }
         return new Data($data);
-    }
-
-    private function extractValue($pattern)
-    {
-        $matches = array();
-        if (preg_match($pattern, $this->inFile->getContents(), $matches)) {
-            return $matches[1];
-        }
-        return 0;
     }
 }

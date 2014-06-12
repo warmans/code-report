@@ -12,7 +12,7 @@ class MathHelper extends Helper
 
     public function pcnt($val, $total)
     {
-        if (!$total) {
+        if ($total == 0) {
             return 0;
         }
         return number_format(($val / $total) * 100, 2);

@@ -20,7 +20,7 @@ class ParserFactory
     public function fromFile(File $file)
     {
         switch (true) {
-            case $file->findLine('#^Directories,Files,Lines of Code.+$#'):
+            case $file->findLine('#^\<phploc\>$#'):
                 return new PHPLoc($file);
             default:
                 throw new \RuntimeException("No parser found for ".$file->getBasename());
