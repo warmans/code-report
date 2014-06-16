@@ -25,12 +25,19 @@ class PHPLoc extends AbstractParser
         return 'phploc';
     }
 
+    /**
+     * @return Data
+     */
     public function getData()
     {
         return $this->getDataXml();
     }
 
-
+    /**
+     * Parse an PHPLOC XML Report
+     *
+     * @return Data
+     */
     public function getDataXml()
     {
         $data = array();
@@ -40,40 +47,6 @@ class PHPLoc extends AbstractParser
                 $data[$node->getName()][] = (string)$node;
             } else {
                 $data[$node->getName()] = array((string)$node);
-            }
-        }
-        return new Data($data);
-    }
-
-    /**
-     * Get a parsed representation of the raw data
-     *
-     * @return mixed
-     */
-    public function getDataCsv()
-    {
-        ini_set("auto_detect_line_endings", true);
-
-        $this->inFile->rewind();
-        $data = array();
-
-        while($row = $this->inFile->fgets()){
-
-            //why sebastian?!
-            $row = explode(',', str_replace('\n\r', '\n', $row));
-
-            if (count($data) === 0) {
-                foreach ($row as $name) {
-                    $data[trim($name)] = array();
-                }
-                $index_map = $row;
-                continue;
-            }
-
-            foreach ($row as $index => $value) {
-                if (isset($index_map[$index])) {
-                    $data[trim($index_map[$index])][] = trim($value, '"');
-                }
             }
         }
         return new Data($data);

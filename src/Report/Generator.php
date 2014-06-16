@@ -34,6 +34,7 @@ class Generator
     /**
      * @param FileParser\AbstractParser $parser
      * @param $outputDir
+     * @return string file written
      */
     public function generateReport(FileParser\AbstractParser $parser, $outputDir)
     {
@@ -60,10 +61,14 @@ class Generator
             return json_encode($metaData);
         });
 
+        $outfile = "$outputDir/{$parser->getFilename()}.html";
+
         //flush report
         $this->filesystem->dumpFile(
-            "$outputDir/{$parser->getFilename()}.html",
+            $outfile,
             $this->templateEngine->render($parser->getFilename(), array('data' => $parser->getData()))
         );
+
+        return $outfile;
     }
 }

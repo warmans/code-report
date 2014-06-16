@@ -4,11 +4,12 @@ Generate attractive static HTML reports from raw code metrics. These are useful 
 built in reports.
 
 ## Supported Input Formats
-* todo
-
-## Install
-todo
+* PHPLOC XML
 
 ## Usage
-todo
 
+code-report generate [path to input file] [path to output directory]
+
+### PhpLOC
+
+    ./vendor/bin/code-report generate [path to phploc.xml] /tmp/code-report/.

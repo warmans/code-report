@@ -52,10 +52,11 @@ class Generate extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->generator->generateReport(
-            $this->fileParserFactory->fromFile(new File($input->getArgument('infile'))),
-            $input->getArgument('outdir')
+        $parser = $this->fileParserFactory->fromFile(new File($input->getArgument('infile')));
+        $outfile = $this->generator->generateReport($parser, $input->getArgument('outdir'));
+
+        $output->writeln(
+            '<info>OK</info> '.$input->getArgument('infile').' -> <comment>'.$parser->getRealName()."</comment> -> $outfile"
         );
-        $output->writeln('ok');
     }
 }
