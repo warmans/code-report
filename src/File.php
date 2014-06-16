@@ -24,6 +24,9 @@ class File extends \SplFileObject
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getContents()
     {
         $buff = '';
