@@ -1,6 +1,6 @@
 Code Report
 ==============
-[![Build Status](https://travis-ci.org/warmans/code-report.svg?branch=master)](https://travis-ci.org/warmans/code-report)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/warmans/code-report/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/warmans/code-report/?branch=master)
+[![Build Status](https://travis-ci.org/warmans/code-report.svg?branch=master)](https://travis-ci.org/warmans/code-report)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/warmans/code-report/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/warmans/code-report/?branch=master)[![Code Coverage](https://scrutinizer-ci.com/g/warmans/code-report/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/warmans/code-report/?branch=master)
 
 Generate attractive static HTML reports from raw code metrics. These are useful for CI servers which do not have
 built in reports.
