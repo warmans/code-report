@@ -50,7 +50,7 @@ class Generator
             //parse meta
             $metaData = array('reports'=>array());
             if ($existingMeta = json_decode($filesystem->fileGetContents($metaFile), true)) {
-                $meta_data['reports'] = array_merge($metaData['reports'], $existingMeta['reports']);
+                $metaData['reports'] = array_merge($metaData['reports'], $existingMeta['reports']);
             }
             $metaData['reports'][$parser->getRealName()]  = "{$parser->getFilename()}.html";
 
