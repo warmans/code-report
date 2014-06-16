@@ -12,7 +12,7 @@ class Data
 
     public function first($key, $default = 0)
     {
-        if(!isset($this->raw[$key])){
+        if (!isset($this->raw[$key])) {
             return $default;
         }
         if (isset($this->raw[$key][0])) {
@@ -23,7 +23,7 @@ class Data
 
     public function last($key, $default = 0)
     {
-        if(!isset($this->raw[$key])){
+        if (!isset($this->raw[$key])) {
             return $default;
         }
         if (isset($this->raw[$key][count($this->raw[$key])-1])) {

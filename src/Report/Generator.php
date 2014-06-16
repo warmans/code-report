@@ -40,7 +40,7 @@ class Generator
     {
         $outputDir = rtrim($outputDir, '/\\');
         if (!$this->filesystem->exists($outputDir)) {
-           $this->filesystem->mkdir($outputDir);
+            $this->filesystem->mkdir($outputDir);
         }
         $metaFile = "$outputDir/code-report.json";
         $templateEngine = $this->templateEngine;
