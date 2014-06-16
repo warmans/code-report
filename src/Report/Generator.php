@@ -42,9 +42,9 @@ class Generator
         if (!$this->filesystem->exists($outputDir)) {
             $this->filesystem->mkdir($outputDir);
         }
-        $metaFile = "$outputDir/code-report.json";
-        $templateEngine = $this->templateEngine;
+
         //lock and update metadata
+        $metaFile = "$outputDir/code-report.json";
 
         $this->filesystem->lockedWrite($metaFile, function ($filesystem) use ($metaFile, $parser) {
             //parse meta
@@ -58,9 +58,8 @@ class Generator
             return json_encode($metaData);
         });
 
-        $outfile = "$outputDir/{$parser->getFilename()}.html";
-
         //flush report
+        $outfile = "$outputDir/{$parser->getFilename()}.html";
         $this->filesystem->dumpFile(
             $outfile,
             $this->templateEngine->render($parser->getFilename(), array('data' => $parser->getData()))
