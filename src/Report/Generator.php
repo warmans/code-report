@@ -46,16 +46,13 @@ class Generator
         $templateEngine = $this->templateEngine;
         //lock and update metadata
 
-        $this->filesystem->lockedWrite($metaFile, function ($filesystem) use ($templateEngine, $metaFile, $parser) {
+        $this->filesystem->lockedWrite($metaFile, function ($filesystem) use ($metaFile, $parser) {
             //parse meta
             $metaData = array('reports'=>array());
             if ($existingMeta = json_decode($filesystem->fileGetContents($metaFile), true)) {
                 $metaData['reports'] = array_merge($metaData['reports'], $existingMeta['reports']);
             }
             $metaData['reports'][$parser->getRealName()]  = "{$parser->getFilename()}.html";
-
-            //add to templates
-            $templateEngine->addGlobal('meta', $metaData);
 
             //flush to disk
             return json_encode($metaData);
