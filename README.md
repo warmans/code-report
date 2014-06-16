@@ -4,12 +4,12 @@ Generate attractive static HTML reports from raw code metrics. These are useful 
 built in reports.
 
 ## Supported Input Formats
-* PHPLOC XML
+* [Phploc XML](https://github.com/sebastianbergmann/phploc)
 
 ## Usage
 
-code-report generate [path to input file] [path to output directory]
+    code-report generate [path to input file] [path to output directory]
 
 ### PhpLOC
-
-    ./vendor/bin/code-report generate [path to phploc.xml] /tmp/code-report/.
+    ./vendor/bin/phploc -log-xml phploc.xml src/
+    ./vendor/bin/code-report generate phploc.xml /tmp/code-report/.
