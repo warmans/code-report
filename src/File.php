@@ -25,6 +25,28 @@ class File extends \SplFileObject
     }
 
     /**
+     * Get a line from a file with a given number of surrounding lines as context
+     *
+     * @param $num
+     * @param int $context
+     * @return array
+     */
+    public function getLine($num, $context=2)
+    {
+        $start = $num - $context;
+        $this->seek(($start > 0 ? $start : 0));
+
+        $cxtToRead = $context+1;
+        $lines = array();
+        while(!$this->eof() && ($cxtToRead-- >= 0)) {
+            $lines[] = $this->current();
+            $this->next();
+        }
+
+        return $lines;
+    }
+
+    /**
      * @return string
      */
     public function getContents()

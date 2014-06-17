@@ -22,6 +22,8 @@ class ParserFactory
         switch (true) {
             case $file->findLine('#^\<phploc\>$#'):
                 return new PHPLoc($file);
+            case $file->findLine('#^\<checkstyle version="1.+$#'):
+                return new Checkstyle($file);
             default:
                 throw new \RuntimeException("No parser found for ".$file->getBasename());
         }

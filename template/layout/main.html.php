@@ -16,7 +16,16 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+        <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+        <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shAutoloader.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js"></script>
+
         <style>
+            .code {
+                background-color : none;
+            }
+
             .sub-header {
                 padding-bottom: 10px;
                 border-bottom: 1px solid #eee;
@@ -85,8 +94,6 @@
             .mma-table th .super {
                 font-size: 50pt;
             }
-
-
         </style>
     </head>
     <body>
@@ -111,13 +118,16 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                console.log('foo');
                 $.get('code-report.json', function (data) {
                     $.each(data.reports, function(name, path){
                         $('#nav-sidebar').append('<li><a href="'+path+'">'+name+'</a></li>');
                     });
                 });
+
+                SyntaxHighlighter.defaults['gutter'] = true;
+                SyntaxHighlighter.all();
             });
+
         </script>
     </body>
 </html>

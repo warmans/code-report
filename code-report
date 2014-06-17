@@ -27,6 +27,7 @@ $services['template.engine'] = function () use ($services) {
     $engine =  new PhpEngine(new TemplateNameParser(), new FilesystemLoader($services['config']['template.paths']));
     $engine->set(new SlotsHelper());
     $engine->set(new CodeReport\Template\MathHelper());
+    $engine->set(new CodeReport\Template\CodeHelper($services['filesystem']));
     return $engine;
 };
 

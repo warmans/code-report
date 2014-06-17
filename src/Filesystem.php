@@ -8,6 +8,12 @@ use Symfony\Component\Filesystem\Exception\IOException;
  */
 class Filesystem extends \Symfony\Component\Filesystem\Filesystem
 {
+
+    public function getFile($path)
+    {
+        return new File($path);
+    }
+
     /**
      * @param $filename
      * @return string
