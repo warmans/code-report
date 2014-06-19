@@ -46,10 +46,10 @@ class Generator
         //lock and update metadata
         $metaFile = "$outputDir/code-report.json";
 
-        $this->filesystem->lockedWrite($metaFile, function ($filesystem) use ($metaFile, $parser) {
+        $this->filesystem->lockedWrite($metaFile, function ($handle) use ($parser) {
             //parse meta
             $metaData = array('reports'=>array());
-            if ($existingMeta = json_decode($filesystem->fileGetContents($metaFile), true)) {
+            if ($existingMeta = json_decode(fgets($handle), true)) {
                 $metaData['reports'] = array_merge($metaData['reports'], $existingMeta['reports']);
             }
             $metaData['reports'][$parser->getRealName()]  = "{$parser->getFilename()}.html";
