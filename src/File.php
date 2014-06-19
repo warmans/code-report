@@ -33,10 +33,9 @@ class File extends \SplFileObject
      */
     public function getLine($num, $context=2)
     {
-        $start = $num - $context;
-        $this->seek(($start > 0 ? $start : 0));
-
-        $cxtToRead = $context+1;
+        $start = ($num - $context) - 1;
+        $this->seek(($start > 0) ? $start : 0);
+        $cxtToRead = ($context * 2) + 1; //+before and after + actual line
         $lines = array();
         while(!$this->eof() && ($cxtToRead-- >= 0)) {
             $lines[] = $this->current();

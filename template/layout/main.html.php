@@ -22,10 +22,6 @@
         <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js"></script>
 
         <style>
-            .code {
-                background-color : none;
-            }
-
             .sub-header {
                 padding-bottom: 10px;
                 border-bottom: 1px solid #eee;
@@ -93,6 +89,24 @@
 
             .mma-table th .super {
                 font-size: 50pt;
+            }
+
+            /* code highlighting */
+
+            code {
+                background : none;
+            }
+
+            .code .container {
+                width : 100%;
+            }
+
+            .syntaxhighlighter table {
+                width : 100%;
+            }
+
+            .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
+                background-color : #F2DEDE !important;
             }
         </style>
     </head>
