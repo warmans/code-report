@@ -27,6 +27,16 @@ class Checkstyle extends AbstractParser
     }
 
     /**
+     * Provide a description of the report content
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return 'Coding standards violations.';
+    }
+
+    /**
      * @return Data
      */
     public function getData()

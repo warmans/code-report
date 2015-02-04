@@ -26,6 +26,13 @@ abstract class AbstractParser
      */
     abstract public function getFilename();
 
+    /**
+     * Provide a description of the report content
+     *
+     * @return string
+     */
+    abstract public function getDescription();
+
 
     /**
      * Get a parsed representation of the raw data

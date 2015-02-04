@@ -7,8 +7,7 @@ use Symfony\Component\Templating\Loader\FilesystemLoader;
 
 foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
     if (file_exists($file)) {
-        require $file;
-        $loaded = true;
+        require_once $file;
         break;
     }
 }

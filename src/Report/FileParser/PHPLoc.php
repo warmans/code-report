@@ -26,6 +26,16 @@ class PHPLoc extends AbstractParser
     }
 
     /**
+     * Provide a description of the report content
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return 'Code metrics such as lines of code, number of classes, number of globals etc.';
+    }
+
+    /**
      * @return Data
      */
     public function getData()

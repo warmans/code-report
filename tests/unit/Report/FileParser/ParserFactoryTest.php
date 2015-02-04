@@ -36,6 +36,12 @@ class ParserFactoryTest extends \PHPUnit_Framework_TestCase
     public function testPhplocFromFile()
     {
         $parser = $this->object->fromFile($this->fixtureFile('phploc.xml'));
-        $this->assertTrue($parser instanceof PHPLoc, 'incorrect parser returned for phploc file');
+        $this->assertTrue($parser instanceof PHPLoc, 'incorrect parser returned for phploc file ('.get_class($parser).')');
+    }
+
+    public function testCheckstyleFromFile()
+    {
+        $parser = $this->object->fromFile($this->fixtureFile('checkstyle.xml'));
+        $this->assertTrue($parser instanceof Checkstyle, 'incorrect parser returned for checkstyle file ('.get_class($parser).')');
     }
 }

@@ -1,8 +1,8 @@
 <?php $this->extend('layout/main'); ?>
 
-<h1 class="page-header">Checkstyle</h1>
+<h1 class="page-header">Checkstyle (<?php echo count($data); ?> files have violations)</h1>
+
 <?php foreach($data as $file) { ?>
-    <h2><?php echo $file['name'];?></h2>
     <?php foreach ($file as $violation) { ?>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -24,6 +24,3 @@
     </div>
     <?php } ?>
 <?php } ?>
-
-
-<?php //try this instead? http://prismjs.com/plugins/line-highlight/#play.50-55,60 ?>

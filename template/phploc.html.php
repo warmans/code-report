@@ -146,7 +146,7 @@
     </div>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Constants=<?php echo $view['math']->pcnt($data->last('globalConstantAccesses'), $data->last('globalAccesses'));?>&Vars=<?php echo $view['math']->pcnt($data->last('globalVariableAccesses'), $data->last('globalAccesses'));?>&Super=<?php echo $view['math']->pcnt($data->last('superGlobalVariableAccesses'), $data->last('globalAccesses'));?>" style="width : 100%; height : 200px"/>
+            <img src="http://chartspree.io//pie.svg?_style=CleanStyle&Constants=<?php echo $view['math']->pcnt($data->last('globalConstantAccesses'), $data->last('globalAccesses'));?>&Vars=<?php echo $view['math']->pcnt($data->last('globalVariableAccesses'), $data->last('globalAccesses'));?>&Super=<?php echo $view['math']->pcnt($data->last('superGlobalVariableAccesses'), $data->last('globalAccesses'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">
@@ -197,7 +197,7 @@
     <hr>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Static=<?php echo $view['math']->pcnt($data->last('staticAttributeAccesses'), $data->last('Attribute Accesses'));?>&Nonstatic=<?php echo $view['math']->pcnt($data->last('instanceAttributeAccesses'), $data->last('attributeAccesses'));?>" style="width : 100%; height : 200px"/>
+            <img src="http://chartspree.io//pie.svg?_style=CleanStyle&Static=<?php echo $view['math']->pcnt($data->last('staticAttributeAccesses'), $data->last('Attribute Accesses'));?>&Nonstatic=<?php echo $view['math']->pcnt($data->last('instanceAttributeAccesses'), $data->last('attributeAccesses'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">
@@ -239,7 +239,7 @@
     <hr>
     <div class="panel-body">
         <div class="col-md-3">
-            <img src="http://charts.brace.io/pie.svg?Static=<?php echo $view['math']->pcnt($data->last('staticMethodCalls'), $data->last('methodCalls'));?>&Instance=<?php echo $view['math']->pcnt($data->last('instanceMethodCalls'), $data->last('methodCalls'));?>" style="width : 100%; height : 200px"/>
+            <img src="http://chartspree.io//pie.svg?_style=CleanStyle&Static=<?php echo $view['math']->pcnt($data->last('staticMethodCalls'), $data->last('methodCalls'));?>&Instance=<?php echo $view['math']->pcnt($data->last('instanceMethodCalls'), $data->last('methodCalls'));?>" style="width : 100%; height : 200px"/>
         </div>
         <div class="col-md-9">
             <table class="table">

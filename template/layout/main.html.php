@@ -22,6 +22,15 @@
         <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js"></script>
 
         <style>
+
+            h2 {
+                font-size : 1.2em;
+            }
+
+            body {
+                font-size: 10pt;
+            }
+
             .sub-header {
                 padding-bottom: 10px;
                 border-bottom: 1px solid #eee;
@@ -115,7 +124,7 @@
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 sidebar">
                     <ul class="nav nav-sidebar" id="nav-sidebar">
-
+                        <li><a href="index.html">Index</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-10 col-sm-offset-2 col-xs-9 col-xs-offset-3 main">
@@ -132,9 +141,11 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
+
                 $.get('code-report.json', function (data) {
-                    $.each(data.reports, function(name, path){
-                        $('#nav-sidebar').append('<li><a href="'+path+'">'+name+'</a></li>');
+                    data = jQuery.parseJSON(data);
+                    $.each(data.reports, function(name, details){
+                        $('#nav-sidebar').append('<li><a href="'+details['file']+'">'+name+'</a></li>');
                     });
                 });
 

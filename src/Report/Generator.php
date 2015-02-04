@@ -11,6 +11,8 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class Generator
 {
+    const META_FILE = 'code-report.json';
+
     /**
      * @var Filesystem
      */
@@ -31,6 +33,16 @@ class Generator
         $this->filesystem = $filesystem;
     }
 
+    public function generateIndex($outputDir)
+    {
+        if ($meta = json_decode($this->filesystem->fileGetContents($outputDir.'/'.self::META_FILE), true)) {
+            $this->filesystem->dumpFile(
+                $outputDir.'/index.html',
+                $this->templateEngine->render('index', array('data' => $meta))
+            );
+        }
+    }
+
     /**
      * @param FileParser\AbstractParser $parser
      * @param $outputDir
@@ -44,15 +56,19 @@ class Generator
         }
 
         //lock and update metadata
-        $metaFile = "$outputDir/code-report.json";
+        $metaFile = "$outputDir/".self::META_FILE;
 
         $this->filesystem->lockedWrite($metaFile, function ($handle) use ($parser) {
-            //parse meta
+
             $metaData = array('reports'=>array());
+
             if ($existingMeta = json_decode(fgets($handle), true)) {
                 $metaData['reports'] = array_merge($metaData['reports'], $existingMeta['reports']);
             }
-            $metaData['reports'][$parser->getRealName()]  = "{$parser->getFilename()}.html";
+            $metaData['reports'][$parser->getRealName()]  = array(
+                'file' => "{$parser->getFilename()}.html",
+                'description' => $parser->getDescription()
+            );
 
             //flush to disk
             return json_encode($metaData);

@@ -30,7 +30,7 @@ class Filesystem extends \Symfony\Component\Filesystem\Filesystem
      */
     public function lockedWrite($filename, \Closure $content)
     {
-        if ($h = fopen($filename, 'w+')) {
+        if ($h = fopen($filename, 'a+')) {
             //lock
             flock($h, LOCK_EX);
 
